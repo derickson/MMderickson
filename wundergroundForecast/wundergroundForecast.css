@@ -1,0 +1,20 @@
+.wundergroundForecast .day {
+  padding-left: 0;
+  padding-right: 25px;
+}
+
+.wundergroundForecast .weather-icon {
+  padding-right: 30px;
+  text-align: center;
+}
+
+.wundergroundForecast .min-temp {
+  padding-left: 20px;
+  padding-right: 0;
+}
+
+.wundergroundForecast .condition {
+  padding-left: 0px;
+  padding-right: 20px;
+}
+
