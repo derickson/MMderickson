@@ -1,6 +1,6 @@
 ##MMderickson
 
-![Screenshot](.github/screenshot.jpg)
+![Screenshot](https://raw.githubusercontent.com/derickson/MMderickson/master/screenshot.jpg)
 
 to install, checkout this repo into your MagicMirror modules directory and rename the folder to ```derickson```
 
