@@ -16,7 +16,7 @@ Module.register("cabi",{
 	defaults: {
 		stationName: null,
 
-		updateInterval: 1 * 60 * 1000, // every 5 minutes
+		updateInterval: 5 * 60 * 1000, // every 5 minutes
 		animationSpeed: 1000,
 		timeFormat: config.timeFormat,
 
