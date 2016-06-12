@@ -1,7 +1,8 @@
 /* Magic Mirror
  * Node Helper: Calendar
- *
- * By Michael Teeuw http://michaelteeuw.nl
+ * 
+ * by @derickson
+ * based on work By Michael Teeuw http://michaelteeuw.nl
  * MIT Licensed.
  */
 
