@@ -1,6 +1,6 @@
 ##MMderickson
 
-![Screenshot](https://raw.githubusercontent.com/derickson/MMderickson/master/screenshot.jpg)
+![Mirror](https://raw.githubusercontent.com/derickson/MMderickson/master/mirror.jpg)
 
 to install, checkout this repo into your MagicMirror modules directory and rename the folder to ```derickson```
 
@@ -37,4 +37,22 @@ configs will then look something like this:
 				uberServerToken: 'XXXXXXX'
 			}
 		},
+		{
+		   	module: 'derickson/cabi',
+		   	position: 'top_left',
+		   	header: "Capital Bikeshare (DC)",
+		   	config: {
+		   		stationName: '1st & M St NE'
+		   	}
+	    },
+	    {
+		   	module: 'derickson/wmata',
+		   	position: 'top_left',
+		   	header: "Capital Bikeshare (DC)",
+		   	config: {
+		   		stationCode: "B35",
+		   		apiKey: "XXXXXXX"
+		   	}
+	    }
+}
 ```
