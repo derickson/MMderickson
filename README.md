@@ -48,7 +48,7 @@ configs will then look something like this:
 	    {
 		   	module: 'derickson/wmata',
 		   	position: 'top_left',
-		   	header: "Capital Bikeshare (DC)",
+		   	header: "DC Metro",
 		   	config: {
 		   		stationCode: "B35",
 		   		apiKey: "XXXXXXX"
