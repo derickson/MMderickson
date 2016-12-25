@@ -1,0 +1,20 @@
+/*wmata.css*/
+
+.wmataContainer {
+	/*position: relative;*/
+  	/*top: 50%;*/
+  	/*transform: translateY(-50%);*/
+}
+
+.wmataContainer .badge {
+	padding-right: 10px;
+}
+
+.wmataContainer span {
+	font-family: 'Helvetica Neue';
+	font-weight: 300;
+	font-size: 16pt;
+	font-color: #C0C0C8;
+	padding: 2px;
+	
+}
