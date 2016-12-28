@@ -80,7 +80,7 @@ Module.register("wmata",{
 
 	socketNotificationReceived: function(notification, payload) {
 		if (notification === "WMATA_DATA_RESPONSE") {
-			console.log('wmata received message for data call');
+			// console.log('wmata received message for data call');
 			this.trains = payload.trains;
 			this.processWmata(null);
 			this.scheduleUpdate(-1);

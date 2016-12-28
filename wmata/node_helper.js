@@ -24,7 +24,7 @@ module.exports = NodeHelper.create({
 		var self = this;
 
 		if(notification === "START_WMATA"){
-			console.log('Node helper got message start wmata');
+			// console.log('Node helper got message start wmata');
 			self.fetch(payload.stationCode, payload.apiKey, function(retTrains) {
 				self.sendSocketNotification("WMATA_DATA_RESPONSE", 
 					{

@@ -14,7 +14,7 @@ module.exports = NodeHelper.create({
 	// Override start method.
 	start: function() {
 		var self = this;
-		
+
 		console.log("Starting node helper for: " + this.name);
 
 	},
@@ -24,11 +24,13 @@ module.exports = NodeHelper.create({
 		var self = this;
 
 		if(notification === "START_WMATAINCIDENTS"){
-			console.log('Node helper got message start wmata');
+			// console.log('Node helper got message start wmata');
 			self.fetch(payload.apiKey, function(retIncidents) {
 				self.sendSocketNotification("WMATAINCIDENTS_DATA_RESPONSE", 
 					{
-						incidents: retIncidents
+						
+						incidents: retIncidents,
+						notEmptyData: 1
 					}
 				);
 			});
@@ -39,7 +41,7 @@ module.exports = NodeHelper.create({
 
 	fetch: function(apiKey, cb) {
 
-    console.log("entering incidents fetch");
+    // console.log("entering incidents fetch");
 		var options = {
 		  url: 'https://api.wmata.com/Incidents.svc/json/Incidents',
 		  headers: {
@@ -48,9 +50,12 @@ module.exports = NodeHelper.create({
 		};
 
 		function callback(error, response, body) {
+	 	  // console.log("fetch returned: "+ response.statusCode);
 		  if (!error && response.statusCode == 200) {
 		    var info = JSON.parse(body);
 		    cb( info.Incidents );
+		  } else {
+		  	console.log(error);
 		  }
 		}
 

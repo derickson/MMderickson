@@ -20,7 +20,23 @@ Module.register("wmataIncidents",{
 		animationSpeed: 1000,
 		timeFormat: config.timeFormat,
 
-		initialLoadDelay: 1, // 0 seconds delay	
+		testEnabled: false,
+		testIncidents: [
+			{
+				"IncidentID": "835A7D8D-7112-479F-ABAF-5BEA298D3AE0",
+				"Description": "Red Line: Trains are single tracking btwn Dupont Circle & Van Ness due to scheduled track work. Expect delays through tonight's closing.",
+				"StartLocationFullName": null,
+				"EndLocationFullName": null,
+				"PassengerDelay": 0.0,
+				"DelaySeverity": null,
+				"IncidentType": "Delay",
+				"EmergencyText": null,
+				"LinesAffected": "RD;",
+				"DateUpdated": "2016-12-24T19:49:51"
+			}
+		],
+
+		initialLoadDelay: 0, // 0 seconds delay	
 		retryDelay: 10000
 	},
 
@@ -49,7 +65,6 @@ Module.register("wmataIncidents",{
 		this.scheduleUpdate(0);
 		this.updateTimer = null;
 
-	
 
 	},
 
@@ -77,9 +92,15 @@ Module.register("wmataIncidents",{
 	},
 
 	socketNotificationReceived: function(notification, payload) {
+		// console.log('wmata incidents listing to notification: '+ notification);
 		if (notification === "WMATAINCIDENTS_DATA_RESPONSE") {
-			console.log('wmata received message for data call');
+			// console.log('wmata received message for data call');
 			this.incidents = payload.incidents;
+			
+			if(this.config.testEnabled){
+				this.incidents = this.config.testIncidents;
+			}
+
 			this.processWmata(null);
 			this.scheduleUpdate(-1);
 		}
