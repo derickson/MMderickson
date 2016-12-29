@@ -25,7 +25,11 @@ Module.register("uber",{
 		timeFormat: config.timeFormat,
 
 		initialLoadDelay: 0, // 0 seconds delay	
-		retryDelay: 10000
+		retryDelay: 10000,
+
+		metricURL: null,
+		metricUsername: null,
+		metricPassword: null
 	},
 
 	// Define required scripts.
@@ -117,6 +121,7 @@ Module.register("uber",{
 
 	// unload the results from uber services
 	processUber: function(resultTime, resultPrice) {
+		var self = this;
 		// console.log("ProcessUber");
 		// console.log(resultTime);
 		// console.log(resultPrice);
@@ -144,9 +149,27 @@ Module.register("uber",{
 			}
 		}
 
+		if(self.config.metricURL !== null && this.uberTime != null && this.uberSurge != null) {
+			// console.log("attempting to log uber 1");
+			this.logMetric( "LOG_UBER", 
+				{ uberTime: this.uberTime, uberSurge: this.uberSurge },
+				self.config.metricURL, self.config.metricUsername, self.config.metricPassword);
+		}
+		
+
 		// when done, redraw the module
 		this.loaded = true;
 		this.updateDom(this.config.animationSpeed);
+	},
+
+	logMetric: function( messageName, payload, url, username, password){
+		var self = this;
+		self.sendSocketNotification(messageName, {
+			"url": url,
+			"username": username,
+			"password": password,
+			"payload": payload
+		});
 	},
 
 

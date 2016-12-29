@@ -26,7 +26,11 @@ Module.register("wunderground",{
 		initialLoadDelay: 0, // 0 seconds delay	
 		retryDelay: 2500,
 
-		apiBase: 'http://api.wunderground.com/api/'
+		apiBase: 'http://api.wunderground.com/api/',
+
+		metricURL: null,
+		metricUsername: null,
+		metricPassword: null
 	},
 
 	// Define required scripts.
@@ -144,9 +148,10 @@ Module.register("wunderground",{
 	 * argument data object - Weather information received form openweather.org.
 	 */
 	processWeather: function(data) {
+		var self = this;
 
-		Log.info('Wunderground data returned');
-		Log.info(data),
+		// Log.info('Wunderground data returned');
+		// Log.info(data),
 		
 		// temperature in F
 		this.temperature = this.roundValue(data.current_observation.temp_f);
@@ -154,8 +159,23 @@ Module.register("wunderground",{
 		// a text blurb about the current weather
 		this.weather = data.current_observation.weather;
 
+		if(self.config.metricURL !== null) this.logMetric( "LOG_WUNDERGROUND", 
+			{ temperature: parseFloat(this.temperature), weather: this.weather },
+			self.config.metricURL, self.config.metricUsername, self.config.metricPassword);
+		
+
 		this.loaded = true;
 		this.updateDom(this.config.animationSpeed);
+	},
+
+	logMetric: function( messageName, payload, url, username, password){
+		var self = this;
+		self.sendSocketNotification(messageName, {
+			"url": url,
+			"username": username,
+			"password": password,
+			"payload": payload
+		});
 	},
 
 	/* scheduleUpdate()
