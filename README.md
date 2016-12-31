@@ -56,3 +56,59 @@ configs will then look something like this:
 	    }
 }
 ```
+
+Oh and you'll need the ES template now
+
+```
+PUT _template/metric_temp
+{
+    "order": 0,
+    "template": "metric-*",
+    "settings": {
+      "index": {
+        "number_of_shards": "1",
+        "number_of_replicas": "0"
+      }
+    },
+    "mappings": {
+      "_default_": {
+        "dynamic_templates": [
+          {
+            "string_fields": {
+              "mapping": {
+                "index": "not_analyzed",
+                "omit_norms": true,
+                "type": "string",
+                "doc_values": true
+              },
+              "match_mapping_type": "string",
+              "match": "*"
+            }
+          }
+        ]
+      },
+      "metric": {
+        "_all": {
+          "enabled": true
+        },
+        "properties": {
+          "@timestamp": {
+            "format": "strict_date_optional_time||epoch_millis",
+            "type": "date"
+          },
+          "location": {
+            "type": "geo_point"
+          },
+          "uber2": {
+            "properties": {
+              "uberTime": { "type": "float"},
+              "uberSurge": { "type": "float"}
+            }
+          }
+        }
+      }
+    },
+    "aliases": {}
+  }
+```
+
