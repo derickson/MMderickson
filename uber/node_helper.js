@@ -21,7 +21,7 @@ module.exports = NodeHelper.create({
 	socketNotificationReceived: function(notification, payload) {
 		var self = this;
 		if(notification === "LOG_UBER"){
-			self.logMetric("uber", payload.url, payload.username, payload.password, payload.payload);
+			self.logMetric("uber2", payload.url, payload.username, payload.password, payload.payload);
 		}
 	},
 
